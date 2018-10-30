@@ -1,0 +1,34 @@
+ccopy_reg
+_reconstructor
+p0
+(cnotes.note
+Note
+p1
+c__builtin__
+object
+p2
+Ntp3
+Rp4
+(dp5
+S'items'
+p6
+(lp7
+S'"defaults'
+p8
+aS'defaults'
+p9
+aS'defaults read .GlobalPreferences'
+p10
+aS'defaults write .GlobalPreferences com.apple.mouse.scaling 0.2'
+p11
+aS'defaults write .GlobalPreferences com.apple.springing.delay 0.1'
+p12
+aS'turn mouse sensitivity to max'
+p13
+aS'in logitech control center, turn input scaling to ~1.25x'
+p14
+asS'name'
+p15
+S'startup'
+p16
+sb.
