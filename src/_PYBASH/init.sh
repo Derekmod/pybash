@@ -2,8 +2,9 @@
 # Tooling to modify pybash through shell.
 # More hooks between bash and python
 _MODULE_NAME="_PYBASH"
-if [ ! -e $PYBASH_DATA_DIR/$_MODULE_NAME ]; then
-  mkdir $PYBASH_DATA_DIR/$_MODULE_NAME
+_MODULE_DATA_DIR=$PYBASH_DATA_DIR/$_MODULE_NAME
+if [ ! -e $_MODULE_DATA_DIR ]; then
+  mkdir $_MODULE_DATA_DIR
 fi
 
 # CREATING NEW MODULES

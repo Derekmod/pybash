@@ -14,7 +14,7 @@ class _Holder(object):
 bvar = _Holder(os.environ)
 
 def bcmd(cmd):
-    f = open(os.path.join(DATA_DIR, '__tmp.sh'), 'a')
+    f = open(os.path.join(os.environ['PYBASH_DATA_DIR'], '__tmp.sh'), 'a')
     f.write(cmd + '\n')
     f.close()
 
@@ -23,7 +23,7 @@ def brun(filepath):
 
 def brun_literal(filepath):
     src = open(filepath)
-    dest = open(os.path.join(DATA_DIR, '__tmp.sh'), 'a')
+    dest = open(os.path.join(os.environ['PYBASH_DATA_DIR'], '__tmp.sh'), 'a')
     for line in src:
         dest.write(line)
     src.close()

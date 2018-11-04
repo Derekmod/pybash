@@ -11,24 +11,12 @@ from _PYBASH import pybash
 from _PYBASH import pybash as pb
 from _PYBASH.pybash import brun, bcmd, bvar
 import _PYBASH.alias as alias
-
-aliases = pybash.getAliases()
-name = 'jot'
-module_name = ''
-fail = False
-if name in aliases:
-  if len(aliases[name]) == 1:
-    for _, alias in aliases[name].items():
-      print(alias.fullDescription())
-  else:
-    if module_name in aliases[name]:
-      print(aliases[name][module_name].fullDescription())
-    else:
-      fail = True
-else:
-  fail = True
-
-if fail:
-  # print('command man jot')
-  bcmd('command man jot')
-
+args = [alias.Argument('bvar name', 'string', True)]
+pybash.registerAlias('h.', 'echo_var', args=args)
+args = [alias.Argument('directory', 'string', False)]
+pybash.registerAlias('d.', 'cd_ls', args=args)
+args = [alias.Argument('directory', 'string', True)]
+pybash.registerAlias('md', 'mkdir_cd', args=args)
+pybash.registerAlias('pbr', 'pybash_reload')
+args = [alias.Argument('filepath', 'string', True, 'path to script')]
+pybash.registerAlias('pb_source', 'pybash_source', args=args)

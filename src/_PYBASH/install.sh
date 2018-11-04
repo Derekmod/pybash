@@ -1,6 +1,6 @@
 MODULE_NAME="_PYBASH"
 MODULE_DATA_DIR=$PYBASH_DATA_DIR/$module_name
-if [ -n -e $MODULE_DATA_DIR ]; then
+if [ ! -e $MODULE_DATA_DIR ]; then
   mkdir $MODULE_DATA_DIR
 fi
 
