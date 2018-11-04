@@ -89,6 +89,7 @@ for line in open('$MODULE_LIST_PATH'):
   module_name = line.strip()
   brun('$PYBASH_SRC_DIR/' + module_name + '/init.sh')
   bcmd('__' + module_name + '_IMPORTED=1')
+  print(module_name)
 "
 
 # load custom aliases

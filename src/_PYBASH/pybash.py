@@ -2,7 +2,7 @@
 import pickle
 import os
 
-from alias import Alias
+from _PYBASH.alias import Alias
 
 DATA_DIR = os.path.join(os.environ['PYBASH_DATA_DIR'], '_PYBASH')
 MODULE_NAME = '_PYBASH'

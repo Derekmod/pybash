@@ -1,4 +1,1 @@
 _PYBASH
-notes
-vars
-cmd
