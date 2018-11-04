@@ -23,6 +23,7 @@ $RECYCLE.BIN/
 
 # Data
 pybash/data/*
+pybash/src/__prev.py
 
 # =========================
 # Operating System Files

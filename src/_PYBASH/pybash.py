@@ -56,7 +56,7 @@ def registerAlias(name, value, module_name='', args=None, desc=None):
             if prev_len == 1:
                 genAmbiguousWrapper(aliases, name)
     bcmd(new_alias.bashCommand())
-    pickle.dump(aliases, open(ALIAS_INFO_PATH, 'wb'))
+    pickle.dump(aliases, open(ALIAS_INFO_PATH, 'wb'), protocol=2)
 
 def genAmbiguousWrapper(aliases, name):
     options = '\t'.join([mname+'.'+name for mname in aliases[name]])

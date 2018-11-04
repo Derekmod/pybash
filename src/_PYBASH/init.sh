@@ -111,11 +111,11 @@ pw "args = [alias.Argument('name', 'string', True)]"
 pw "args.append( alias.Argument('module name', 'string', True) )"
 pw "pybash.registerAlias('pb_unalias', 'pb_remove_alias', args=args, module_name='$_MODULE_NAME')"
 pb_remove_alias() {  # [name] [module_name]
-  p "aliases = pickle.load(open(pybash.ALIAS_INFO_PATH, 'rb') )
+  p "aliases = pickle.load(open(pybash.ALIAS_INFO_PATH, 'rb'), protocol=2)
 del aliases['$1']['$2']
 if not len(aliases['$1']):
   del aliases['$1']
-pickle.dump(aliases, open(pybash.ALIAS_INFO_PATH, 'wb') )"
+pickle.dump(aliases, open(pybash.ALIAS_INFO_PATH, 'wb'), protocol=2)"
 }
 
 pw "args = [alias.Argument('name', 'string', True),

@@ -7,6 +7,7 @@ if [ ! -e $PYBASH_DATA_DIR/installed_modules.txt ]; then
 fi
 
 export PYTMP_PATH=$PYBASH_SRC_DIR/__tmp.py
+export PYTMP2_PATH=$PYBASH_SRC_DIR/__prev.py
 export PYSTD_SRC_PATH=$PYBASH_SRC_DIR/pystd_src.py
 export PYSTD_GEN_PATH=$PYBASH_DATA_DIR/pystd_gen.py
 export MODULE_LIST_PATH=$PYBASH_DATA_DIR/installed_modules.txt
@@ -27,8 +28,8 @@ pybash_execute() {
   if [ ! -e $PYTMP_PATH ]; then
     return
   fi
-  python $PYTMP_PATH
-  rm -f $PYTMP_PATH
+  mv $PYTMP_PATH $PYTMP2_PATH
+  python $PYTMP2_PATH
 
   BASH_CMD_PATH=$PYBASH_DATA_DIR/_PYBASH/__tmp.sh
   BASH_OLD_CMD_PATH=$PYBASH_DATA_DIR/_PYBASH/__tmp_prev.sh
