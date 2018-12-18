@@ -34,7 +34,7 @@ pybash_new_module() {
     echo "#!/bin/sh
 # Installation file for $MODULE_DIR
 
-echo $1 >> $MODULE_LIST_PATH" > $INSTALL_FILE_PATH
+echo $1 >> $$PYBASH_DATA_DIR/installed_modules.txt" > $INSTALL_FILE_PATH
 
     INIT_FILE_PATH=$MODULE_DIR/init.sh
     echo "# TODO: startup script for $1 module.

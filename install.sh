@@ -3,7 +3,7 @@ PYBASH_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 # TODO: check if python installed
 
 PYBASH_DATA_DIR=$PYBASH_DIR/data
-if [ -n -e $PYBASH_DATA_DIR ]; then
+if [ ! -e $PYBASH_DATA_DIR ]; then
   mkdir $PYBASH_DATA_DIR
 fi
 

@@ -22,7 +22,7 @@ $RECYCLE.BIN/
 *.pyc
 
 # Data
-pybash/data/*
+data/*
 
 # =========================
 # Operating System Files
