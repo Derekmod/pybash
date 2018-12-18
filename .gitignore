@@ -23,6 +23,7 @@ $RECYCLE.BIN/
 
 # Data
 data/*
+src/__prev.py
 
 # =========================
 # Operating System Files

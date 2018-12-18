@@ -2,11 +2,17 @@ export PYBASH_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 export PYBASH_SRC_DIR=$PYBASH_DIR/src
 export PYBASH_DATA_DIR=$PYBASH_DIR/data
 
+if [ ! -e $PYBASH_DATA_DIR ]; then
+  mkdir $PYBASH_DATA_DIR
+fi
+
 if [ ! -e $PYBASH_DATA_DIR/installed_modules.txt ]; then
   echo "_PYBASH" >> $PYBASH_DATA_DIR/installed_modules.txt
 fi
+touch $PYBASH_DATA_DIR/__tmp.sh
 
 export PYTMP_PATH=$PYBASH_SRC_DIR/__tmp.py
+export PYTMP2_PATH=$PYBASH_SRC_DIR/__prev.py
 export PYSTD_SRC_PATH=$PYBASH_SRC_DIR/pystd_src.py
 export PYSTD_GEN_PATH=$PYBASH_DATA_DIR/pystd_gen.py
 export MODULE_LIST_PATH=$PYBASH_DATA_DIR/installed_modules.txt
@@ -27,11 +33,11 @@ pybash_execute() {
   if [ ! -e $PYTMP_PATH ]; then
     return
   fi
-  python $PYTMP_PATH
-  rm -f $PYTMP_PATH
+  mv $PYTMP_PATH $PYTMP2_PATH
+  python $PYTMP2_PATH
 
-  BASH_CMD_PATH=$PYBASH_DATA_DIR/_PYBASH/__tmp.sh
-  BASH_OLD_CMD_PATH=$PYBASH_DATA_DIR/_PYBASH/__tmp_prev.sh
+  BASH_CMD_PATH=$PYBASH_DATA_DIR/__tmp.sh
+  BASH_OLD_CMD_PATH=$PYBASH_DATA_DIR/__tmp_prev.sh
   while [ -e $BASH_CMD_PATH ]; do
     mv -f $BASH_CMD_PATH $BASH_OLD_CMD_PATH
     source $BASH_OLD_CMD_PATH
@@ -89,6 +95,7 @@ for line in open('$MODULE_LIST_PATH'):
   module_name = line.strip()
   brun('$PYBASH_SRC_DIR/' + module_name + '/init.sh')
   bcmd('__' + module_name + '_IMPORTED=1')
+  print(module_name)
 "
 
 # load custom aliases
