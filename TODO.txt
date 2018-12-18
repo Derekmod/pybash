@@ -1,0 +1,7 @@
+HIGH:
+- better aliasing
+- working cmd library
+
+LOW:
+- cleanup variable names and style
+- add header comment to each file as to what is installed at the file's execution
