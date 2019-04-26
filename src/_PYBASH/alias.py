@@ -33,13 +33,12 @@ class Argument(object):
 
 
 class Alias(object):
-    def __init__(self, name, value, module_name='', args=None, desc=None):
+    def __init__(self, name, value, module_name='', args=None, function=None, desc=None):
         self.module_name = module_name
         self.name = name
         self.value = value
-        self.args = args
-        if self.args is None:
-            self.args = []
+        self.args = args or []
+        self.function = function
         self.desc = desc
         self.unique = True
 
@@ -75,6 +74,13 @@ class Alias(object):
 
         return ret
 
+    def genFunction(self):
+        if not self.function:
+            return ''
+        return '''{self.value}() {  # GENERATED
+{self.function}
+}'''
+
     def bashCommand(self):
         ret = ''
         if self.unique:
@@ -84,7 +90,9 @@ class Alias(object):
         full_desc = self.fullDescription()
         usage = self.usage()
         name = self.getName()
+        function = self.genFunction()
         return ret + '''
+{function}
 alias {name}="{self.name}_wrapper"
 {name}_wrapper() {{
   NARGS=$#

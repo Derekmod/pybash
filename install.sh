@@ -1,3 +1,5 @@
+# Adds pybash to .bashrc and installs _PYBASH module
+
 PYBASH_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 
 # TODO: check if python installed
