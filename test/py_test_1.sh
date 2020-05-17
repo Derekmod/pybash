@@ -1,8 +1,10 @@
 echo "EXPECTED: test_1"
 echo "ACTUAL..."
-p "print('test_1 pass')"
+p "print('test_1')"
 
+echo
 echo "#############################"
+echo
 
 echo "EXPECTED:
 a
@@ -12,7 +14,9 @@ echo "ACTUAL..."
 p "for c in 'adg':
   print(c)"
 
+echo
 echo "#############################"
+echo
 
 echo "EXPECTED:
 stage 1
