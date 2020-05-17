@@ -1,4 +1,5 @@
 echo "EXPECTED: test_1"
+echo "ACTUAL..."
 p "print('test_1 pass')"
 
 echo "#############################"
@@ -7,6 +8,7 @@ echo "EXPECTED:
 a
 d
 g"
+echo "ACTUAL..."
 p "for c in 'adg':
   print(c)"
 
@@ -19,6 +21,7 @@ stage 1
 2
 3
 exec"
+echo "ACTUAL..."
 pw "print('stage 1')"
 pw "for i in range(4):"
 pw "  print(i)"
