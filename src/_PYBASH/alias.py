@@ -1,14 +1,30 @@
 class Argument(object):
-    def __init__(self, name, type=None, required=False, description=""):
+    """ ## One argument in a shell command.
+    Args:
+    - name `str`: Name of the arg
+    - type `?`: arg type
+    - required `bool`: Whether the argument is required
+    - description `str`: TODO: rename to desc
+    - default `?`:
+    """
+    def __init__(
+        self,
+        name,
+        type=None,
+        required=False,
+        description="",
+        default=None,
+    ):
         self.name = name
         self.type = type
         self.required = required
         self.description = description
+        self.default = default
 
     def summary(self):
         ret = self.name
         if self.type is not None:
-            ret += ': ' + self.type
+            ret += ': ' + str(self.type)
         if self.required:
             ret = '[' + ret + ']'
         else:
@@ -33,7 +49,24 @@ class Argument(object):
 
 
 class Alias(object):
-    def __init__(self, name, value, module_name='', args=None, function=None, desc=None):
+    """ ## Represents a shell command (generalized alias).
+    Args:
+    - name `str`: Command name
+    - value `str`: Name of underlying function  # TODO: generate this value
+    - module_name `str`: Which module defined this alias (used for disambiguation)
+    - args `Iterable[Argument]`: Arguments required in this alias
+    - function `bool`: Whether a function needs to be declared
+    - desc `str`: Description of this alias
+    """
+    def __init__(
+        self,
+        name,
+        value,
+        module_name='',
+        args=None,
+        function=None,
+        desc=None,
+    ):
         self.module_name = module_name
         self.name = name
         self.value = value
