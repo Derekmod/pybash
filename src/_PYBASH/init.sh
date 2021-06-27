@@ -190,4 +190,7 @@ f.close()
 }
 
 
+alias timer="python3 $PYBASH_SRC_DIR/$_MODULE_NAME/timer.py"
+
+
 pybash_execute
