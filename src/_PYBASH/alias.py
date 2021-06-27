@@ -33,13 +33,13 @@ class Argument(object):
 
 
 class Alias(object):
-    def __init__(self, name, value, module_name='', args=None, function=None, desc=None):
+    def __init__(self, name, value, module_name='', args=None, function=None, description=None):
         self.module_name = module_name
         self.name = name
         self.value = value
         self.args = args or []
         self.function = function
-        self.desc = desc
+        self.description = description
         self.unique = True
 
         self.nrequired = 0
@@ -64,8 +64,8 @@ class Alias(object):
         ret = 'alias {name}="{self.value}"\n'.format(**locals())
         ret += 'USAGE: ' + self.usage() + '\n'
         ret += 'Module: "' + self.module_name + '"'
-        if self.desc:
-            ret += '\n' + self.desc
+        if self.description:
+            ret += '\n' + self.description
 
         if self.args:
             ret += '\nArguments:'

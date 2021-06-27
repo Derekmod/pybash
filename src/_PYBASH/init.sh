@@ -15,7 +15,7 @@ pybash.registerAlias(module_name='$_MODULE_NAME',
                      name='new_module',
                      value='pybash_new_module',
                      args=args,
-                     desc='Creates a new pybash module with some starter files')
+                     description='Creates a new pybash module with some starter files')
 "
 pybash_new_module() {
   if [ $# -lt 1 ]; then
@@ -168,8 +168,8 @@ if fail:
 }
 
 pw "args = [alias.Argument('alias_name', 'string', True),
-            alias.Argument('command_string', 'string', True, desc='Replace args such as $$ARG with [%ARG]')]"
-pw "pybash.registerAlias('pb_alias', 'pybash_alias', args=args, module_name="$_MODULE_NAME")"
+            alias.Argument('command_string', 'string', True, description='Replace args such as $$ARG with [%ARG]')]"
+pw "pybash.registerAlias('pb_alias', 'pybash_alias', args=args, module_name='$_MODULE_NAME')"
 pybash_alias() {
   p "
 cmd_string = \"$2\"

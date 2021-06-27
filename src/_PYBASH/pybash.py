@@ -57,8 +57,8 @@ def cleanup_list_file(filename):
     writer.close()
 
 ALIAS_INFO_PATH = os.path.join(DATA_DIR, '.aliases.pickle')
-def registerAlias(name, value, module_name='', args=None, desc=None):
-    new_alias = Alias(name, value, module_name, args, desc)
+def registerAlias(name, value, module_name='', args=None, description=None):
+    new_alias = Alias(name, value, module_name, args, description)
     # bcmd(new_alias.bashCommand())
     aliases = {}
     try:
