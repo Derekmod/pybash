@@ -8,32 +8,53 @@ DATA_DIR = os.path.join(os.environ['PYBASH_DATA_DIR'], '_PYBASH')
 MODULE_NAME = '_PYBASH'
 
 class _Holder(object):
+    """ Converts a map into an object (keys turn into attributes) """
     def __init__(self, map):
         self.__dict__ = dict(map)
 
-bvar = _Holder(os.environ)
+    def __getitem__(self, var_name):
+        return self.__dict__[var_name]
+
+    def __setitem__(self, var_name, value):
+        bcmd('{}={}'.format(var_name, value))
+        self.__dict__[var_name] = value
+
+bvar = _Holder(os.environ)  # bash variables
+
+
+TMP_SCRIPT_PATH = os.path.join(os.environ['PYBASH_DATA_DIR'], '__tmp.sh')
+
 
 def bcmd(cmd):
-    f = open(os.path.join(os.environ['PYBASH_DATA_DIR'], '__tmp.sh'), 'a')
+    """ Runs a bash command after python execution finishes. """
+    f = open(TMP_SCRIPT_PATH, 'a')
     f.write(cmd + '\n')
     f.close()
 
 def brun(filepath):
+    """ Runs a pybash script after python execution finishes. """
     bcmd('source ' + filepath + '; pybash_eval')
 
 def brun_literal(filepath):
+    """ Runs a pybash script after python execution finishes
+    by appending it directly to post-execution script.
+    """
     src = open(filepath)
-    dest = open(os.path.join(os.environ['PYBASH_DATA_DIR'], '__tmp.sh'), 'a')
+    dest = open(TMP_SCRIPT_PATH, 'a')
     for line in src:
         dest.write(line)
     src.close()
     dest.close()
 
 def cleanup_list_file(filename):
+    """ Cleans up a given file containing a list of strings.
+    Dedups entries.
+    """
     items = {_ for _ in open(filename)}
     writer = open(filename, 'w')
     for item in items:
         writer.write(item + '\n')
+    writer.close()
 
 ALIAS_INFO_PATH = os.path.join(DATA_DIR, '.aliases.pickle')
 def registerAlias(name, value, module_name='', args=None, desc=None):

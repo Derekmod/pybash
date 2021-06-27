@@ -1,4 +1,3 @@
 #!/bin/sh
-# Installation file for /Users/derekmod/Documents/pybash/src/cmd
 
-echo cmd >> /Users/derekmod/Documents/pybash/data/installed_modules.txt
+echo cmd >> $PYBASH_DATA_DIR/installed_modules.txt

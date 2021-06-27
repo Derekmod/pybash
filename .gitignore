@@ -24,6 +24,7 @@ $RECYCLE.BIN/
 # Data
 data/*
 src/__prev.py
+pybash.zip
 
 # =========================
 # Operating System Files

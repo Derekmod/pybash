@@ -1,15 +1,11 @@
+# Sets up all global pybash variables
+# Then sets up base pybash functions
+# Then initializes all pybash modules
+# + loads aliases
+
 export PYBASH_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 export PYBASH_SRC_DIR=$PYBASH_DIR/src
 export PYBASH_DATA_DIR=$PYBASH_DIR/data
-
-if [ ! -e $PYBASH_DATA_DIR ]; then
-  mkdir $PYBASH_DATA_DIR
-fi
-
-if [ ! -e $PYBASH_DATA_DIR/installed_modules.txt ]; then
-  echo "_PYBASH" >> $PYBASH_DATA_DIR/installed_modules.txt
-fi
-touch $PYBASH_DATA_DIR/__tmp.sh
 
 export PYTMP_PATH=$PYBASH_SRC_DIR/__tmp.py
 export PYTMP2_PATH=$PYBASH_SRC_DIR/__prev.py
@@ -17,7 +13,16 @@ export PYSTD_SRC_PATH=$PYBASH_SRC_DIR/pystd_src.py
 export PYSTD_GEN_PATH=$PYBASH_DATA_DIR/pystd_gen.py
 export MODULE_LIST_PATH=$PYBASH_DATA_DIR/installed_modules.txt
 
-pybash_eval_raw() {
+if [ ! -e $PYBASH_DATA_DIR ]; then
+  mkdir $PYBASH_DATA_DIR
+fi
+
+if [ ! -e $PYBASH_DATA_DIR/installed_modules.txt ]; then
+  source $PYBASH_SRC_DIR/_PYBASH/install.sh
+fi
+touch $PYBASH_DATA_DIR/__tmp.sh
+
+_pybash_eval_raw() {
   echo "$@" > $PYTMP_PATH
   python3 $PYTMP_PATH
   rm -f $PYTMP_PATH
@@ -81,7 +86,7 @@ require_fail() {
 
 # setup pystd
 cp $PYSTD_SRC_PATH $PYSTD_GEN_PATH
-pybash_eval_raw "
+_pybash_eval_raw "
 import os
 for line in open('$MODULE_LIST_PATH'):
   module_name = line.strip()

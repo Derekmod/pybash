@@ -35,7 +35,7 @@ pybash_new_module() {
     echo "#!/bin/sh
 # Installation file for $MODULE_DIR
 
-echo $1 >> $MODULE_LIST_PATH" > $INSTALL_FILE_PATH
+echo $1 >> $$PYBASH_DATA_DIR/installed_modules.txt" > $INSTALL_FILE_PATH
 
     INIT_FILE_PATH=$MODULE_DIR/init.sh
     echo "# TODO: startup script for $1 module.
@@ -100,12 +100,33 @@ py_import() {
 pw "pybash.getAliases()"
 
 pw "args = [alias.Argument('name', 'string', True, 'Name of alias'),
-    alias.Argument('value', 'string', True, 'Name of function that is called')]"
+    alias.Argument('value', 'string', True, 'Name of function that is called'),
+    alias.Argument('function', 'string', False, 'body of function to be called')]"
 pw "pybash.registerAlias('pb_alias', 'pybash_alias', args=args)"
 pybash_alias() { # [name] [value] (temporary)
   # PENDING: make alias temporary based on $3
-  # FUTURE: PROMPT ARGS
-  p "pybash.registerAlias('$1', '$2')"
+  if [ $# -lt 3 ]; then
+    p "pybash.registerAlias('$1', '$2')"
+  else
+    p "pybash.registerAlias('$1', '$2', function='''$3''')"
+  fi
+}
+
+pw "args = [alias.Argument('name', 'string', True, 'Name of alias'),
+            alias.Argument('command', 'string', True, 'Command to execute')]"
+pw "pybash.registerAlias('pb_alias', 'pb_quick_alias', args=args, module_name='$_MODULE_NAME')"
+pybash_quick_alias() { # [name] "[function]"
+  p """
+f = open('$_MODULE_DATA_DIR/example_alias_store.txt', 'a')
+f.write('''
+$1_base() {
+  $2
+}
+''')
+f.close()
+"""
+  source $_MODULE_DATA_DIR/example_alias_store.txt
+  p "pybash.registerAlias('$1', '$1_base')"
 }
 
 pw "args = [alias.Argument('name', 'string', True)]"

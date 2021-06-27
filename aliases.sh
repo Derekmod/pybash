@@ -1,6 +1,3 @@
-require _PYBASH
-if require_fail; then return; fi
-
 alias n="nano"
 alias nano="atom"
 alias e="emacs"
@@ -10,6 +7,9 @@ alias h="echo "
 alias rmf="rm -f"
 alias a="alias"
 alias py="python3"
+
+require _PYBASH
+if require_fail; then return; fi
 
 pw "args = [alias.Argument('bvar name', 'string', True)]"
 pw "pybash.registerAlias('h.', 'echo_var', args=args)"
