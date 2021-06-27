@@ -146,5 +146,27 @@ if fail:
 "
 }
 
+pw "args = [alias.Argument('alias_name', 'string', True),
+            alias.Argument('command_string', 'string', True, desc='Replace args such as $$ARG with [%ARG]')]"
+pw "pybash.registerAlias('pb_alias', 'pybash_alias', args=args, module_name="$_MODULE_NAME")"
+pybash_alias() {
+  p "
+cmd_string = \"$2\"
+while '[%' in cmd_string:
+  start = cmd_string.index('[%')
+  end = start + cmd_string[start:].index(']') + 1
+  arg_name = cmd_string[start+2:end-1]
+  cmd_string = cmd_string[:start] + '$' + arg_name + cmd_string[end:]
+f = open('$_MODULE_DATA_DIR/user_aliases.sh', 'a')
+f.write('''
+pw \"pybash.registerAlias('$1', '_user_gen_$1', module_name='$_MODULE_NAME' + '_user')\"
+_user_gen_$1() {
+  {cmd_string}
+}
+'''.format(**locals())
+f.close()
+"
+}
+
 
 pybash_execute

@@ -19,7 +19,7 @@ export MODULE_LIST_PATH=$PYBASH_DATA_DIR/installed_modules.txt
 
 pybash_eval_raw() {
   echo "$@" > $PYTMP_PATH
-  python $PYTMP_PATH
+  python3 $PYTMP_PATH
   rm -f $PYTMP_PATH
 }
 
@@ -34,7 +34,7 @@ pybash_execute() {
     return
   fi
   mv $PYTMP_PATH $PYTMP2_PATH
-  python $PYTMP2_PATH
+  python3 $PYTMP2_PATH
 
   BASH_CMD_PATH=$PYBASH_DATA_DIR/__tmp.sh
   BASH_OLD_CMD_PATH=$PYBASH_DATA_DIR/__tmp_prev.sh

@@ -9,7 +9,7 @@ alias c="clear; "
 alias h="echo "
 alias rmf="rm -f"
 alias a="alias"
-alias py="python"
+alias py="python3"
 
 pw "args = [alias.Argument('bvar name', 'string', True)]"
 pw "pybash.registerAlias('h.', 'echo_var', args=args)"
